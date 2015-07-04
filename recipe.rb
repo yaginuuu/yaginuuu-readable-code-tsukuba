@@ -1,31 +1,42 @@
 # -*- coding: utf-8 -*-
 
 class Recipe
+  def initialize(filename)
+    @file = File.open(ARGV[0])   
+    @recipes = []
+  end
+  
+  def print_recipes_all
+    @recipes.each do |recipe| 
+      puts "#{recipe[:id]}: #{recipe[:name]} #{recipe[:recipe]}"
+    end
+  end
 
-  # 保存
-  def self.save
-    recipes = %w(オムライス 親子丼 杏仁豆腐)
-    open(ARGV[0], 'w') do |file|
-      recipes.each do |recipe|
-        file.puts recipe
+  def print_recipes_by_id(search_id)
+    # 実はここうまく動いてない
+    @recipes.each do |recipe|
+      if search_id == id  
+        puts "#{recipe[:id]}: #{recipe[:name]} #{recipe[:recipe]}"
       end
     end
   end
 
-  # 出力
-  def self.print
-    results = []
-    hash = {}
-    open(ARGV[0]) do |recipes|
-      recipes.each_with_index do |recipe, i|
-        hash[:id] = i + 1
-        hash[:recipe] = recipe
-        results[i] = hash
-        puts "#{hash[:id]}: #{hash[:recipe]}"
-      end
+  def read
+    @file.each_line.with_index(1) do |row, id|
+      recipe = row.split(" ")
+      @recipes.push({:id => id.to_i, :name => recipe[0], :recipe => recipe[1]})
     end
   end
 end
 
-Recipe.save
-Recipe.print
+filename = ARGV[0]
+search_id = ARGV[1]
+
+recipe = Recipe.new(filename)
+recipe.read
+
+if search_id.nil?
+  recipe.print_recipes_all
+else 
+  recipe.print_recipes_by_id(search_id)
+end
