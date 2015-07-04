@@ -13,6 +13,7 @@ class Recipe
   end
 
   def print_recipes_by_id(search_id)
+    # 実はここうまく動いてない
     @recipes.each do |recipe|
       if search_id == id  
         puts "#{recipe[:id]}: #{recipe[:name]} #{recipe[:recipe]}"
