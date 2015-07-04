@@ -5,7 +5,7 @@ class Recipe
   # 保存
   def self.save
     recipes = %w(オムライス 親子丼 杏仁豆腐)
-    open('./recipe.txt', 'w') do |file|
+    open(ARGV[0], 'w') do |file|
       recipes.each do |recipe|
         file.puts recipe
       end
@@ -16,7 +16,7 @@ class Recipe
   def self.print
     results = []
     hash = {}
-    open('./recipe.txt') do |recipes|
+    open(ARGV[0]) do |recipes|
       recipes.each_with_index do |recipe, i|
         hash[:id] = i + 1
         hash[:recipe] = recipe
