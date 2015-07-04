@@ -4,7 +4,8 @@ class Recipe
   # 出力
   def self.print
     hash = {}
-    open(ARGV[0]) do |recipes|
+    filename = ARGV[0]
+    open(filename) do |recipes|
       recipes.each_with_index do |recipe, i|
         hash[:id] = i + 1
         hash[:recipe] = recipe
