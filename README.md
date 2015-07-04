@@ -1,8 +1,9 @@
 ## yaginuuu-readable-code-tsukuba
 ### Usage
 ```
-cd /recipe.rb
+$ cd /recipe.rb
+$ ruby recipe.rb
 ```
-```
-ruby recipe.rb
-```
+
+### FileOperation
+

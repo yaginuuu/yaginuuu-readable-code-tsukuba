@@ -1,21 +1,27 @@
 # -*- coding: utf-8 -*-
 
 class Recipe
-  #def initialize
 
-  #end
-
-  def self.print
-    File.foreach('./recipe.txt') do |recipe|
-      puts recipe
-    end
-  end
-
+  # 保存
   def self.save
     recipes = %w(オムライス 親子丼 杏仁豆腐)
     open('./recipe.txt', 'w') do |file|
       recipes.each do |recipe|
         file.puts recipe
+      end
+    end
+  end
+
+  # 出力
+  def self.print
+    results = []
+    hash = {}
+    open('./recipe.txt') do |recipes|
+      recipes.each_with_index do |recipe, i|
+        hash[:id] = i + 1
+        hash[:recipe] = recipe
+        results[i] = hash
+        puts "#{hash[:id]}: #{hash[:recipe]}"
       end
     end
   end
