@@ -1,5 +1,9 @@
+# -*- coding: utf-8 -*-
+require 'yaml'
+
 def print
-  puts "オムライス"
+  word = YAML.load_file('target.yml')
+  puts word['target']['name']
 end
 
 print
