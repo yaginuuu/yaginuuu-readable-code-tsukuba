@@ -1,19 +1,26 @@
 # -*- coding: utf-8 -*-
-require 'csv'
 
 class Recipe
-  # 出力
-  def self.print
-    hash = {}
-    filename = ARGV[0]
-    recipes = CSV.read(filename)
-    recipes.each_with_index do |recipe, i|
-        hash[:id] = i + 1
-        hash[:name] = recipe[0]
-        hash[:recipe] = recipe[1]
-        puts "#{hash[:id]}: #{hash[:name]} #{hash[:recipe]}"
+  def initialize(filename)
+    @file = File.open(ARGV[0])   
+    @recipes = []
+  end
+  
+  def print
+    @recipes.each do |recipe| 
+      puts "#{recipe[:id]}: #{recipe[:name]} #{recipe[:recipe]}"
+    end
+  end
+
+  def read
+    @file.each_line.with_index(1) do |row, id|
+      recipe = row.split(" ")
+      @recipes.push({:id => id, :name => recipe[0], :recipe => recipe[1]})
     end
   end
 end
 
-Recipe.print
+filename = ARGV[0]
+recipe = Recipe.new(filename)
+recipe.read
+recipe.print
