@@ -1,9 +1,9 @@
 ## yaginuuu-readable-code-tsukuba
 ### Usage
+
+レシピを全取得
 ```
-$ cd /recipe.rb
-$ ruby recipe.rb
+$ ruby recipe.rb recipe.csv
 ```
 
-### FileOperation
 
